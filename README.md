@@ -129,9 +129,9 @@ install(FILES
 
 ```
 ## ARIAC Competition Configuration
-mkdir -p ~/group4_rwa2/src/ariac_example/config
-subl ~/group4_rwa2/src/ariac_example/config/sample_gear_conf.yaml
-
+mkdir -p ~/group4_rwa2/src/ariac_example/config  
+subl ~/group4_rwa2/src/ariac_example/config/sample_gear_conf.yaml  
+  
 Copy the following content into the ```sample_gear_conf.yaml``` file:-
 ```
 sensors:
