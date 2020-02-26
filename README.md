@@ -49,7 +49,7 @@ Make the CMakeLists.txt file. This must be in the same folder as your package ma
 ```zsh
 subl ~/group4_rwa1/src/ariac_example/CMakeLists.txt
 ```
-Paste the following content into the CMakeLists.txt file:-
+Paste the following content into the CMakeLists.txt file. **Be sure to comment catkin_python_setup()** :-
 ```
 cmake_minimum_required(VERSION 2.8.3)
 project(ariac_example)
@@ -65,7 +65,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-catkin_python_setup()
+#catkin_python_setup()
 
 catkin_package()
 
@@ -447,6 +447,11 @@ int main(int argc, char ** argv) {
 // %EndTag(FULLTEXT)%
 ```
 
+To run the example:-
+```
+cd ~/group4_rwa1
+catkin_make
+```
 
 
 # References
