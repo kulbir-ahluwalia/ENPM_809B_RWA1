@@ -1,21 +1,21 @@
-# ENPM_809B_RWA1
+# ENPM_809B_rwa2
 
 Follow the following steps to create a competition package. First, create a catkin workspace:-
 ```
-mkdir -p ~/group4_rwa1/src   
-cd ~/group4_rwa1/src   
+mkdir -p ~/group4_rwa2/src   
+cd ~/group4_rwa2/src   
 source /opt/ros/melodic/setup.zsh #source /opt/ros/melodic/setup.bash for bash users  
 catkin_init_workspace  
 ```
 
-Create a package named "ariac_example" in the ```src``` folder of the workspace named ```group4_rwa1```:-
+Create a package named "ariac_example" in the ```src``` folder of the workspace named ```group4_rwa2```:-
 ```
-mkdir ~/group4_rwa1/src/ariac_example
-cd ~/group4_rwa1/src/ariac_example
+mkdir ~/group4_rwa2/src/ariac_example
+cd ~/group4_rwa2/src/ariac_example
 ```
 Then create a file named package.xml in the "ariac_example" package folder:-
 ```
-subl ~/group4_rwa1/src/ariac_example/package.xml
+subl ~/group4_rwa2/src/ariac_example/package.xml
 ```
 Some useful information about the package.xml file [2]:-
 1. This is called the package manifest. Its job is to describe what is needed to build and run your package in a machine readable format. Additionally, it marks the root folder of your package.
@@ -47,7 +47,7 @@ Paste the following in the package.xml file:-
 ```
 Make the CMakeLists.txt file. This must be in the same folder as your package manifest.
 ```zsh
-subl ~/group4_rwa1/src/ariac_example/CMakeLists.txt
+subl ~/group4_rwa2/src/ariac_example/CMakeLists.txt
 ```
 Paste the following content into the CMakeLists.txt file. **Be sure to comment catkin_python_setup()** :-
 ```
@@ -129,8 +129,8 @@ install(FILES
 
 ```
 ## ARIAC Competition Configuration
-mkdir -p ~/group4_rwa1/src/ariac_example/config
-subl ~/group4_rwa1/src/ariac_example/config/sample_gear_conf.yaml
+mkdir -p ~/group4_rwa2/src/ariac_example/config
+subl ~/group4_rwa2/src/ariac_example/config/sample_gear_conf.yaml
 
 Copy the following content into the ```sample_gear_conf.yaml``` file:-
 ```
@@ -176,11 +176,11 @@ sensors:
 ## Creating a C++ Node to Interface with the Competition
 To create the src folder in the package ```ariac_example```:-
 ```
-mkdir -p ~/group4_rwa1/src/ariac_example/src/
+mkdir -p ~/group4_rwa2/src/ariac_example/src/
 ```
 To create a C++ ROS Node:-
 ```
-subl ~/group4_rwa1/src/ariac_example/src/ariac_example_node.cpp
+subl ~/group4_rwa2/src/ariac_example/src/ariac_example_node.cpp
 ```
 Copy the following content into the ```ariac_example_node.cpp``` file:-
 ```
@@ -449,10 +449,20 @@ int main(int argc, char ** argv) {
 
 To run the example:-
 ```
-cd ~/group4_rwa1
+cd ~/group4_rwa2
 catkin_make
 ```
+Now source setup.zsh to load the environment variables.
+```zsh
+source ~/group4_rwa2/devel/setup.zsh
+source ~/group4_rwa2/devel/setup.bash #for bash users
+```
 
+To launch the competition with our configuration:-
+```
+rosrun osrf_gear gear.py -f `catkin_find --first-only --share osrf_gear`/config/sample.yaml ~/group4_rwa2/src/ariac_example/config/sample_gear_conf.yaml
+
+```
 
 # References
 1. Installing ARIAC - https://bitbucket.org/osrf/ariac/wiki/2019/tutorials/installation
