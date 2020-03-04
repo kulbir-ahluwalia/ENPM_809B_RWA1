@@ -2,20 +2,20 @@
 
 Follow the following steps to create a competition package. First, create a catkin workspace:-
 ```
-mkdir -p ~/group4_rwa2/src   
-cd ~/group4_rwa2/src   
+mkdir -p ~/809b/src   
+cd ~/809b/src   
 source /opt/ros/melodic/setup.zsh #source /opt/ros/melodic/setup.bash for bash users  
 catkin_init_workspace  
 ```
 
-Create a package named "ariac_example" in the ```src``` folder of the workspace named ```group4_rwa2```:-
+Create a package named "group4_rwa2" in the ```src``` folder of the workspace named ```809b```:-
 ```
-mkdir ~/group4_rwa2/src/ariac_example
-cd ~/group4_rwa2/src/ariac_example
+mkdir ~/809b/src/group4_rwa2
+cd ~/809b/src/group4_rwa2
 ```
-Then create a file named package.xml in the "ariac_example" package folder:-
+Then create a file named package.xml in the "group4_rwa2" package folder:-
 ```
-subl ~/group4_rwa2/src/ariac_example/package.xml
+subl ~/809b/src/group4_rwa2/package.xml
 ```
 Some useful information about the package.xml file [2]:-
 1. This is called the package manifest. Its job is to describe what is needed to build and run your package in a machine readable format. Additionally, it marks the root folder of your package.
@@ -26,7 +26,7 @@ Paste the following in the package.xml file:-
 <?xml version="1.0"?>
 <package format="2">
 
-  <name>ariac_example</name>
+  <name>group4_rwa2</name>
   <version>0.1.0</version>
   <description>An example of an ARIAC competitor's package.</description>
   <maintainer email="kulbir@terpmail.umd.edu">Kulbir Singh Ahluwalia</maintainer>
@@ -47,12 +47,12 @@ Paste the following in the package.xml file:-
 ```
 Make the CMakeLists.txt file. This must be in the same folder as your package manifest.
 ```zsh
-subl ~/group4_rwa2/src/ariac_example/CMakeLists.txt
+subl ~/809b/src/group4_rwa2/CMakeLists.txt
 ```
 Paste the following content into the CMakeLists.txt file. **Be sure to comment catkin_python_setup()** :-
 ```
 cmake_minimum_required(VERSION 2.8.3)
-project(ariac_example)
+project(group4_rwa2)
 
 find_package(catkin REQUIRED COMPONENTS
   osrf_gear
@@ -76,9 +76,9 @@ catkin_package()
 include_directories(include ${catkin_INCLUDE_DIRS})
 
 ## Declare a C++ executable
-add_executable(ariac_example_node src/ariac_example_node.cpp)
-add_dependencies(ariac_example_node ${catkin_EXPORTED_TARGETS})
-target_link_libraries(ariac_example_node ${catkin_LIBRARIES})
+add_executable(group4_rwa2_node src/group4_rwa2_node.cpp)
+add_dependencies(group4_rwa2_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(group4_rwa2_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -89,13 +89,13 @@ target_link_libraries(ariac_example_node ${catkin_LIBRARIES})
 
 ## Mark executable scripts (Python etc.) for installation
 install(PROGRAMS
-  script/ariac_example_node.py
+  script/group4_rwa2_node.py
   script/tf2_example.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
 ## Mark executables and/or libraries for installation
-install(TARGETS ariac_example_node
+install(TARGETS group4_rwa2_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -119,7 +119,7 @@ install(FILES
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_ariac_example.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_group4_rwa2.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
@@ -129,8 +129,8 @@ install(FILES
 
 ```
 ## ARIAC Competition Configuration
-mkdir -p ~/group4_rwa2/src/ariac_example/config  
-subl ~/group4_rwa2/src/ariac_example/config/sample_gear_conf.yaml  
+mkdir -p ~/809b/src/group4_rwa2/config  
+subl ~/809b/src/group4_rwa2/config/sample_gear_conf.yaml  
   
 Copy the following content into the ```sample_gear_conf.yaml``` file:-
 ```
@@ -174,15 +174,15 @@ sensors:
 ```
 
 ## Creating a C++ Node to Interface with the Competition
-To create the src folder in the package ```ariac_example```:-
+To create the src folder in the package ```group4_rwa2```:-
 ```
-mkdir -p ~/group4_rwa2/src/ariac_example/src/
+mkdir -p ~/809b/src/group4_rwa2/src/
 ```
 To create a C++ ROS Node:-
 ```
-subl ~/group4_rwa2/src/ariac_example/src/ariac_example_node.cpp
+subl ~/809b/src/group4_rwa2/src/group4_rwa2_node.cpp
 ```
-Copy the following content into the ```ariac_example_node.cpp``` file:-
+Copy the following content into the ```group4_rwa2_node.cpp``` file:-
 ```
 // Copyright 2016 Open Source Robotics Foundation, Inc.
 //
@@ -384,7 +384,7 @@ void laser_profiler_callback(const sensor_msgs::LaserScan::ConstPtr & msg) {
 // %Tag(MAIN)%
 int main(int argc, char ** argv) {
   // Last argument is the default name of the node.
-  ros::init(argc, argv, "ariac_example_node");
+  ros::init(argc, argv, "group4_rwa2_node");
 
   ros::NodeHandle node;
 
@@ -449,18 +449,18 @@ int main(int argc, char ** argv) {
 
 To run the example:-
 ```
-cd ~/group4_rwa2
+cd ~/809b
 catkin_make
 ```
 Now source setup.zsh to load the environment variables.
 ```zsh
-source ~/group4_rwa2/devel/setup.zsh
-source ~/group4_rwa2/devel/setup.bash #for bash users
+source ~/809b/devel/setup.zsh
+source ~/809b/devel/setup.bash #for bash users
 ```
 
 To launch the competition with our configuration:-
 ```
-rosrun osrf_gear gear.py -f `catkin_find --first-only --share osrf_gear`/config/sample.yaml ~/group4_rwa2/src/ariac_example/config/sample_gear_conf.yaml
+rosrun osrf_gear gear.py -f `catkin_find --first-only --share osrf_gear`/config/sample.yaml ~/809b/src/group4_rwa2/config/sample_gear_conf.yaml
 
 ```
 
