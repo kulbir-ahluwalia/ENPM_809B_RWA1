@@ -1,4 +1,4 @@
-# ENPM_809B_rwa2
+# ENPM_809B_RWA2
 
 Follow the following steps to create a competition package. First, create a catkin workspace:-
 ```
